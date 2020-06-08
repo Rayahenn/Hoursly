@@ -1,12 +1,13 @@
 ﻿using System;
+using Hoursly.Domain.Common.SharedKernel;
 
 namespace Hoursly.Domain.Common
 {
     public class AuditableEntity : Entity
     {
-        public AuditableEntity(IDateTimeProvider dateTimeProvider)
+        public AuditableEntity()
         {
-            DateCreated = dateTimeProvider.Now;
+            DateCreated = SystemClock.Now;
         }
 
         public DateTime DateCreated { get; set; }

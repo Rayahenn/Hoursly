@@ -5,7 +5,9 @@ namespace Hoursly.Domain.Projects
 {
     public sealed class Project : AuditableEntity
     {
-        private Project(string name, DateTime? deadline, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
+        private Project(
+            string name,
+            DateTime? deadline)
         {
             Name = name;
             Deadline = deadline;
@@ -14,9 +16,11 @@ namespace Hoursly.Domain.Projects
         public string Name { get; }
         public DateTime? Deadline { get; }
 
-        public static Project Create(string name, DateTime? deadline, IDateTimeProvider dateTimeProvider)
+        public static Project Create(
+            string name,
+            DateTime? deadline)
         {
-            return new Project(name, deadline, dateTimeProvider);
+            return new Project(name, deadline);
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hoursly.Persistance
 {
-    public class HourslyDbContext : DbContext
+    public class HourslyDbContext : DbContext, IHourslyDbContex
     {
         public HourslyDbContext(
             DbContextOptions<HourslyDbContext> options)
@@ -11,12 +11,12 @@ namespace Hoursly.Persistance
         {
         }
 
-        public DbSet<Project> Projects { get; set; }
+        public DbSet<Project> Projects { get; set; } = null!;
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(typeof(HourslyDbContext).Assembly);
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(HourslyDbContext).Assembly);
         }
     }
 }
