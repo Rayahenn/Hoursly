@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Hoursly.Domain.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hoursly.Persistance.Common
 {
@@ -20,14 +21,14 @@ namespace Hoursly.Persistance.Common
             await _contex.AddAsync(entity, cancellationToken);
         }
 
-        public Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _contex.Set<TEntity>().ToListAsync(cancellationToken);
         }
 
-        public Task<TEntity> GetAsync(Guid publicId, CancellationToken cancellationToken = default)
+        public async Task<TEntity> GetAsync(Guid publicId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _contex.Set<TEntity>().SingleAsync(c => c.PublicId == publicId, cancellationToken);
         }
     }
 }

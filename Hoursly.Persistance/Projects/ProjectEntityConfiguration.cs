@@ -8,6 +8,7 @@ namespace Hoursly.Persistance.Projects
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Project> builder)
         {
+            builder.HasKey(c => c.PublicId);
             builder.Property(c => c.Deadline).IsRequired(false);
             builder.Property(c => c.Name).IsRequired().HasMaxLength(255);
         }

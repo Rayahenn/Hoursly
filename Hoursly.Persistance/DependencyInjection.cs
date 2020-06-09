@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using Hoursly.Domain.Common;
+using Hoursly.Persistance.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,8 @@ namespace Hoursly.Persistance
         {
             var connectionString = configuration.GetConnectionString("MasterDatabase");
             AddDbContext<HourslyDbContext>(services, connectionString);
+
+            services.AddScoped(typeof(IBaseEntityRepository<>), typeof(BaseEntityRepository<>));
 
             return services;
         }

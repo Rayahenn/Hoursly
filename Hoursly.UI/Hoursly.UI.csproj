@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hoursly.Application\Hoursly.Application.csproj" />
     <ProjectReference Include="..\Hoursly.Persistance\Hoursly.Persistance.csproj" />
   </ItemGroup>
 

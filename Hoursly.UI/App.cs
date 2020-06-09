@@ -1,22 +1,20 @@
 ﻿using System;
 using System.IO;
-using System.Windows;
+using Hoursly.Application;
 using Hoursly.Persistance;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SW = System.Windows;
 
 namespace Hoursly.UI
 {
-    /// <summary>
-    ///     Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public partial class App : SW.Application
     {
         private const string ConfigFileName = "appsettings.json";
         public IServiceProvider ServiceProvider { get; private set; }
         public IConfiguration Configuration { get; private set; }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(SW.StartupEventArgs e)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -37,6 +35,7 @@ namespace Hoursly.UI
         {
             services.AddTransient(typeof(MainWindow));
             services.AddPersistence(Configuration);
+            services.AddApplication();
         }
     }
 }

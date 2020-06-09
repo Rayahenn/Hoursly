@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hoursly.Persistance
 {
-    public class HourslyDbContext : DbContext, IHourslyDbContex
+    public class HourslyDbContext : DbContext
     {
         public HourslyDbContext(
             DbContextOptions<HourslyDbContext> options)
