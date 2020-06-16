@@ -14,7 +14,7 @@ namespace Hoursly.ViewModels
             ActivateItem(new ReportsViewModel());
         }
 
-        public void ShowPageTwo()
+        public void ShowProjectsView()
         {
             ActivateItem(new ProjectsViewModel());
         }

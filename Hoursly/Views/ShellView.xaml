@@ -18,9 +18,11 @@
                     Content="Projekty"
                     HorizontalAlignment="Right" Margin="0,5"
                     VerticalAlignment="Top"
+                    x:Name="ShowProjectsView"
                     Width="100" />
             </StackPanel>
-            <ContentControl x:Name="ActiveItem" />
+
         </DockPanel>
+        <ContentControl x:Name="ActiveItem" HorizontalAlignment="Stretch" Margin="50" VerticalAlignment="Stretch" />
     </Grid>
 </Window>

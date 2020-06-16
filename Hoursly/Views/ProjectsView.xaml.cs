@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hoursly.Views
@@ -17,7 +18,7 @@ namespace Hoursly.Views
     /// <summary>
     /// Interaction logic for ProjectsView.xaml
     /// </summary>
-    public partial class ProjectsView : Window
+    public partial class ProjectsView : UserControl
     {
         public ProjectsView()
         {
