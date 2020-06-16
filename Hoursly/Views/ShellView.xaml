@@ -11,6 +11,7 @@
             <StackPanel>
                 <Button
                     Content="Raporty"
+                    x:Name="ShowReportsView"
                     HorizontalAlignment="Right" Margin="0"
                     VerticalAlignment="Top"
                     Width="100" />
@@ -23,6 +24,7 @@
             </StackPanel>
 
         </DockPanel>
-        <ContentControl x:Name="ActiveItem" HorizontalAlignment="Stretch" Margin="50" VerticalAlignment="Stretch" />
+        <ContentControl x:Name="ActiveItem" HorizontalAlignment="Stretch" Margin="100, 0, 0, 0"
+                        VerticalAlignment="Stretch" />
     </Grid>
 </Window>

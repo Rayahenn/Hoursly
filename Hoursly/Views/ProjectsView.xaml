@@ -4,8 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Hoursly.Views"
+             xmlns:enums="clr-namespace:Hoursly.Common.Extensions.Enums"
+             xmlns:models="clr-namespace:Hoursly.Models"
              mc:Ignorable="d"
-             Background="Aqua"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid />
+    <Grid>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="485,289,0,0" VerticalAlignment="Top"
+                Width="75" x:Name="Create" />
+        <DataGrid HorizontalAlignment="Left" x:Name="Projects" Height="292" Margin="25,33,0,0" VerticalAlignment="Top"
+                  Width="439" />
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="22" Margin="485,54,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" />
+        <Label Content="Name" HorizontalAlignment="Left" Margin="485,32,0,0" VerticalAlignment="Top" Width="142"
+               FontSize="9" />
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="485,103,0,0" VerticalAlignment="Top"
+                    Width="120" />
+        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="485,154,0,0" VerticalAlignment="Top"
+                    Width="120" />
+        <ComboBox HorizontalAlignment="Left"
+                  x:Name="Priority"
+                  ItemsSource="{Binding Source={enums:EnumBindingSource {x:Type models:ProjectPriority}}}"
+                  Margin="485,203,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="TaskLimit" HorizontalAlignment="Left" Height="23" Margin="485,252,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" />
+        <Label Content="Start Date" HorizontalAlignment="Left" Margin="485,81,0,0" VerticalAlignment="Top" Width="142"
+               FontSize="9" />
+        <Label Content="End Date" HorizontalAlignment="Left" Margin="485,132,0,0" VerticalAlignment="Top" Width="142"
+               FontSize="9" />
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="485,181,0,0" VerticalAlignment="Top" Width="142"
+               FontSize="9" />
+        <Label Content="Task Limit" HorizontalAlignment="Left" Margin="485,230,0,0" VerticalAlignment="Top" Width="142"
+               FontSize="9" />
+    </Grid>
 </UserControl>
