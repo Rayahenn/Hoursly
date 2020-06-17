@@ -11,6 +11,7 @@ namespace Hoursly.Models
             ProjectPriority priority = ProjectPriority.Low,
             int? taskLimit = null)
         {
+            PublicId = Guid.NewGuid();
             Name = name;
             StartDate = startDate;
             EndDate = endDate;
@@ -18,11 +19,12 @@ namespace Hoursly.Models
             TaskLimit = taskLimit;
         }
 
-        public string Name { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public ProjectPriority Priority { get; set; }
-        public int? TaskLimit { get; set; }
+        public Guid PublicId { get; }
+        public string Name { get; }
+        public DateTime StartDate { get; }
+        public DateTime? EndDate { get; }
+        public ProjectPriority Priority { get; }
+        public int? TaskLimit { get; }
     }
 
     public enum ProjectPriority

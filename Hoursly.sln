@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C5823673-D87E-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoursly", "Hoursly\Hoursly.csproj", "{1DB079BA-88B8-47F5-82E5-5BCF6F0CAECF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{AFF0CCF1-8B03-4548-9C35-84D5D20010A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoursly.Persistance", "Hoursly.Persistance\Hoursly.Persistance.csproj", "{2F11DCAA-2572-4CFC-9677-E82BEE51DA6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{1DB079BA-88B8-47F5-82E5-5BCF6F0CAECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DB079BA-88B8-47F5-82E5-5BCF6F0CAECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DB079BA-88B8-47F5-82E5-5BCF6F0CAECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F11DCAA-2572-4CFC-9677-E82BEE51DA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F11DCAA-2572-4CFC-9677-E82BEE51DA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F11DCAA-2572-4CFC-9677-E82BEE51DA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F11DCAA-2572-4CFC-9677-E82BEE51DA6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1DB079BA-88B8-47F5-82E5-5BCF6F0CAECF} = {C5823673-D87E-420E-BA17-89C20969FB0F}
+		{2F11DCAA-2572-4CFC-9677-E82BEE51DA6A} = {AFF0CCF1-8B03-4548-9C35-84D5D20010A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AC58BCC-F64C-4AD7-BD58-E1A2BDAD7AB0}

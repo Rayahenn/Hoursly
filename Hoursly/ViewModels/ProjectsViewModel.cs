@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using Hoursly.Models;
+using Hoursly.Validators;
 
 namespace Hoursly.ViewModels
 {
@@ -82,7 +85,17 @@ namespace Hoursly.ViewModels
         public void Create()
         {
             var project = new ProjectModel(Name, StartDate, EndDate, Priority, TaskLimit);
+            var validator = new ProjectValidator();
+            var validationResult = validator.Validate(project);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList();
+                MessageBox.Show(string.Join(Environment.NewLine, errors));
+                return;
+            }
+
             Projects.Add(project);
+            MessageBox.Show($"Project {project.Name} added");
         }
     }
 }

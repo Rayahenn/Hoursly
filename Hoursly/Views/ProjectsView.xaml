@@ -9,31 +9,32 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="485,289,0,0" VerticalAlignment="Top"
+        <Button Content="Add" HorizontalAlignment="Left" Margin="585,174,0,0" VerticalAlignment="Top"
                 Width="75" x:Name="Create" />
         <DataGrid HorizontalAlignment="Left" x:Name="Projects" Height="292" Margin="25,33,0,0" VerticalAlignment="Top"
                   Width="439" />
-        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="22" Margin="485,54,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="22" Margin="540,33,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" />
-        <Label Content="Name" HorizontalAlignment="Left" Margin="485,32,0,0" VerticalAlignment="Top" Width="142"
+        <Label Content="Name" HorizontalAlignment="Left" Margin="502,32,0,0" VerticalAlignment="Top" Width="38"
                FontSize="9" />
-        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="485,103,0,0" VerticalAlignment="Top"
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="540,61,0,0" VerticalAlignment="Top"
                     Width="120" />
-        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="485,154,0,0" VerticalAlignment="Top"
+        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="540,90,0,0" VerticalAlignment="Top"
                     Width="120" />
         <ComboBox HorizontalAlignment="Left"
-                  x:Name="Priority"
+                  SelectedValue="{Binding Path=Priority}"
                   ItemsSource="{Binding Source={enums:EnumBindingSource {x:Type models:ProjectPriority}}}"
-                  Margin="485,203,0,0" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="TaskLimit" HorizontalAlignment="Left" Height="23" Margin="485,252,0,0" TextWrapping="Wrap"
+                  Margin="540,119,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="TaskLimit" HorizontalAlignment="Left" Height="23" Margin="540,146,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label Content="Start Date" HorizontalAlignment="Left" Margin="485,81,0,0" VerticalAlignment="Top" Width="142"
+        <Label Content="Start Date" HorizontalAlignment="Left" Margin="485,61,0,0" VerticalAlignment="Top" Width="55"
                FontSize="9" />
-        <Label Content="End Date" HorizontalAlignment="Left" Margin="485,132,0,0" VerticalAlignment="Top" Width="142"
+        <Label Content="End Date" HorizontalAlignment="Left" Margin="493,90,0,0" VerticalAlignment="Top" Width="47"
+               FontSize="9" RenderTransformOrigin="0.045,-0.227" />
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="496,119,0,0" VerticalAlignment="Top" Width="44"
                FontSize="9" />
-        <Label Content="Priority" HorizontalAlignment="Left" Margin="485,181,0,0" VerticalAlignment="Top" Width="142"
+        <Label Content="Task Limit" HorizontalAlignment="Left" Margin="485,146,0,0" VerticalAlignment="Top" Width="55"
                FontSize="9" />
-        <Label Content="Task Limit" HorizontalAlignment="Left" Margin="485,230,0,0" VerticalAlignment="Top" Width="142"
-               FontSize="9" />
+        <Label Content="Projekty" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
