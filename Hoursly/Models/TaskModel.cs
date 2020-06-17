@@ -1,19 +1,33 @@
-﻿namespace Hoursly.Models
+﻿using System;
+
+namespace Hoursly.Models
 {
     public class TaskModel
     {
         public TaskModel(
-            ProjectModel project,
             string name,
-            ProjectPriority priority)
+            string description,
+            ProjectPriority priority,
+            TaskStatus status)
         {
-            Project = project;
+            PublicId = Guid.NewGuid();
             Name = name;
+            Description = description;
             Priority = priority;
+            Status = status;
         }
 
-        public ProjectModel Project { get; }
+        public Guid PublicId { get; }
         public string Name { get; }
+        public string Description { get; }
         public ProjectPriority Priority { get; }
+        public TaskStatus Status { get; }
+    }
+
+    public enum TaskStatus
+    {
+        Todo,
+        InProgress,
+        Completed
     }
 }

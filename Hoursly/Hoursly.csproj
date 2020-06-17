@@ -88,8 +88,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\Extensions\Enums\EnumBindingSourceExtension.cs" />
+    <Compile Include="Common\Extensions\Validations\ValidationResultExtensions.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Repositories\Common\HourslyDbContex.cs" />
     <Compile Include="Validators\ProjectValidator.cs" />
     <Compile Include="ViewModels\ProjectsViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
@@ -108,6 +110,9 @@
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TasksView.xaml.cs">
+      <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TasksView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

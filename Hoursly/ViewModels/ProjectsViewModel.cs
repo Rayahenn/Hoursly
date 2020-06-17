@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
+using Hoursly.Common.Extensions.Validations;
 using Hoursly.Models;
 using Hoursly.Validators;
 
@@ -89,8 +89,8 @@ namespace Hoursly.ViewModels
             var validationResult = validator.Validate(project);
             if (!validationResult.IsValid)
             {
-                var errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList();
-                MessageBox.Show(string.Join(Environment.NewLine, errors));
+                var errorMessage = validationResult.GetErrorsSummary();
+                MessageBox.Show(errorMessage);
                 return;
             }
 

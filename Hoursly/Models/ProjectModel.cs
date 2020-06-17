@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Hoursly.Models
 {
@@ -12,6 +13,7 @@ namespace Hoursly.Models
             int? taskLimit = null)
         {
             PublicId = Guid.NewGuid();
+            Tasks = new ObservableCollection<TaskModel>();
             Name = name;
             StartDate = startDate;
             EndDate = endDate;
@@ -25,6 +27,7 @@ namespace Hoursly.Models
         public DateTime? EndDate { get; }
         public ProjectPriority Priority { get; }
         public int? TaskLimit { get; }
+        public ObservableCollection<TaskModel> Tasks { get; }
     }
 
     public enum ProjectPriority
