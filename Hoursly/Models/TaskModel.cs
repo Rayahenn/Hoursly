@@ -1,4 +1,5 @@
 ﻿using System;
+using Hoursly.Entities;
 
 namespace Hoursly.Models
 {

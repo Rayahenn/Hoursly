@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Windows;
 using Autofac;
 using Caliburn.Micro;
+using Hoursly.Database;
+using Hoursly.Mappers.Common;
+using Hoursly.Repositories.Common;
 using Hoursly.ViewModels;
 
 namespace Hoursly
@@ -18,6 +22,9 @@ namespace Hoursly
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
+            var connectionString = ConfigurationManager.ConnectionStrings["HourslyDbContex"].ToString();
+            var migrator = new DatabaseMigrator();
+            migrator.MigrateDatabase(connectionString);
             DisplayRootViewFor<ShellViewModel>();
         }
 
@@ -26,8 +33,21 @@ namespace Hoursly
             var builder = new ContainerBuilder();
             builder.RegisterType<WindowManager>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<EventAggregator>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<ShellViewModel>()
+
+
+            var currentAssembly = typeof(HourslyDbContex).Assembly;
+            builder.RegisterAssemblyTypes(currentAssembly)
+                .Where(t => t.Name.EndsWith("ViewModel"))
                 .AsSelf();
+
+            builder.RegisterAssemblyTypes(currentAssembly)
+                .Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(IMapper<,>).Assembly)
+                .AsClosedTypesOf(typeof(IMapper<,>))
+                .SingleInstance();
 
             _container = builder.Build();
         }

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Hoursly.Views"
              xmlns:enums="clr-namespace:Hoursly.Common.Extensions.Enums"
              xmlns:models="clr-namespace:Hoursly.Models"
+             xmlns:entities="clr-namespace:Hoursly.Entities"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -23,7 +24,7 @@
                     Width="120" />
         <ComboBox HorizontalAlignment="Left"
                   SelectedValue="{Binding Path=Priority}"
-                  ItemsSource="{Binding Source={enums:EnumBindingSource {x:Type models:ProjectPriority}}}"
+                  ItemsSource="{Binding Source={enums:EnumBindingSource {x:Type entities:ProjectPriority}}}"
                   Margin="540,119,0,0" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="TaskLimit" HorizontalAlignment="Left" Height="23" Margin="540,146,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />

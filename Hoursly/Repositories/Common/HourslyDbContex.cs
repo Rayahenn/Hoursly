@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using Hoursly.Entities;
 
 namespace Hoursly.Repositories.Common
 {
-    class HourslyDbContex
+    public class HourslyDbContex : DbContext
     {
+        public DbSet<Project> Projects { get; set; }
+    }
+
+    internal sealed class Configuration : DbMigrationsConfiguration<HourslyDbContex>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+        }
     }
 }
