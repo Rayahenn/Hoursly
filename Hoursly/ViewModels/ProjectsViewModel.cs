@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
+using FluentValidation;
 using Hoursly.Common.Extensions.Validations;
 using Hoursly.Entities;
 using Hoursly.Mappers.Common;
@@ -14,6 +15,7 @@ namespace Hoursly.ViewModels
     public class ProjectsViewModel : Screen
     {
         private readonly IProjectRepository _projectRepository;
+        private readonly IValidator<ProjectModel> _projectValidator;
         private readonly IMapper<Project, ProjectModel> _mapper;
         private DateTime? _endDate;
         private string _name;
@@ -24,10 +26,11 @@ namespace Hoursly.ViewModels
 
         public ProjectsViewModel(
             IProjectRepository projectRepository,
-            IMapper<Project, ProjectModel> mapper)
+            IMapper<Project, ProjectModel> mapper, IValidator<ProjectModel> projectValidator)
         {
             _projectRepository = projectRepository;
             _mapper = mapper;
+            _projectValidator = projectValidator;
             LoadProjects();
         }
 
@@ -101,8 +104,7 @@ namespace Hoursly.ViewModels
                 Priority,
                 TaskLimit);
 
-            var validator = new ProjectValidator();
-            var validationResult = validator.Validate(projectModel);
+            var validationResult = _projectValidator.Validate(projectModel);
             if (!validationResult.IsValid)
             {
                 var errorMessage = validationResult.GetErrorsSummary();

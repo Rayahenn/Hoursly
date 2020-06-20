@@ -1,18 +1,19 @@
 ﻿using Caliburn.Micro;
+using Hoursly.Database;
 using Hoursly.Repositories;
 
 namespace Hoursly.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
-        private readonly IProjectRepository _projectRepository;
         private readonly ProjectsViewModel _projectsViewModel;
-        public ShellViewModel(IProjectRepository projectRepository, ProjectsViewModel projectsView)
+
+        public ShellViewModel(ProjectsViewModel projectsView)
         {
-            _projectRepository = projectRepository;
             _projectsViewModel = projectsView;
-            ShowReportsView();
+            ShowProjectsView();
         }
+
 
         public void ShowReportsView()
         {

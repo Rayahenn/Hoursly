@@ -5,7 +5,7 @@ namespace Hoursly.Database
 {
     public class DatabaseMigrator : IDatabaseMigrator
     {
-        public bool MigrateDatabase(string connectionString)
+        public void MigrateDatabase(string connectionString)
         {
             var upgrader =
                 DeployChanges.To
@@ -14,9 +14,7 @@ namespace Hoursly.Database
                     .LogToConsole()
                     .Build();
 
-            var result = upgrader.PerformUpgrade();
-
-            return result.Successful;
+            upgrader.PerformUpgrade();
         }
     }
 }

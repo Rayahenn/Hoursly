@@ -2,6 +2,6 @@
 {
     public interface IDatabaseMigrator
     {
-        bool MigrateDatabase(string connectionString);
+        void MigrateDatabase(string connectionString);
     }
 }

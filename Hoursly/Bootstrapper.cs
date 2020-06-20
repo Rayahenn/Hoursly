@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Windows;
 using Autofac;
 using Caliburn.Micro;
+using Hoursly.Common.Extensions.DependencyInjection;
+using Hoursly.Common.Helpers;
 using Hoursly.Database;
-using Hoursly.Mappers.Common;
-using Hoursly.Repositories.Common;
 using Hoursly.ViewModels;
 
 namespace Hoursly
 {
     public class Bootstrapper : BootstrapperBase
     {
-        private static IContainer _container;
+        private  IContainer _container;
 
         public Bootstrapper()
         {
@@ -22,32 +21,21 @@ namespace Hoursly
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["HourslyDbContex"].ToString();
-            var migrator = new DatabaseMigrator();
-            migrator.MigrateDatabase(connectionString);
+            MigrateDatabase();
             DisplayRootViewFor<ShellViewModel>();
         }
 
         protected override void Configure()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<WindowManager>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<EventAggregator>().AsImplementedInterfaces().SingleInstance();
+            var currentAssembly = typeof(Bootstrapper).Assembly;
 
-
-            var currentAssembly = typeof(HourslyDbContex).Assembly;
-            builder.RegisterAssemblyTypes(currentAssembly)
-                .Where(t => t.Name.EndsWith("ViewModel"))
-                .AsSelf();
-
-            builder.RegisterAssemblyTypes(currentAssembly)
-                .Where(t => t.Name.EndsWith("Repository"))
-                .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterAssemblyTypes(typeof(IMapper<,>).Assembly)
-                .AsClosedTypesOf(typeof(IMapper<,>))
-                .SingleInstance();
+            builder.AddCaliburn();
+            builder.AddMappers();
+            builder.AddDatabase();
+            builder.AddRepositories(currentAssembly);
+            builder.AddValidators(currentAssembly);
+            builder.AddViewModels(currentAssembly);
 
             _container = builder.Build();
         }
@@ -75,6 +63,13 @@ namespace Hoursly
         protected override void BuildUp(object instance)
         {
             _container.InjectProperties(instance);
+        }
+
+        private void MigrateDatabase()
+        {
+            var connectionString = HourslyConfiguration.ConnectionString;
+            var databaseMigrator = _container.Resolve<IDatabaseMigrator>();
+            databaseMigrator.MigrateDatabase(connectionString);
         }
     }
 }
