@@ -3,108 +3,164 @@ using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using FluentValidation;
+using Hoursly.Common.Extensions.Models;
 using Hoursly.Common.Extensions.Validations;
 using Hoursly.Entities;
 using Hoursly.Mappers.Common;
 using Hoursly.Models;
 using Hoursly.Repositories;
-using Hoursly.Validators;
 
 namespace Hoursly.ViewModels
 {
     public class ProjectsViewModel : Screen
     {
+        private readonly IMapper<Project, ProjectModel> _mapper;
         private readonly IProjectRepository _projectRepository;
         private readonly IValidator<ProjectModel> _projectValidator;
-        private readonly IMapper<Project, ProjectModel> _mapper;
-        private DateTime? _endDate;
-        private string _name;
-        private ProjectPriority _priority;
-        private BindableCollection<ProjectModel> _projects = new BindableCollection<ProjectModel>();
-        private DateTime _startDate = DateTime.Now;
-        private int? _taskLimit;
+
+        private bool _editMode;
+
+
+        private string _editOrCreateText;
+        private ProjectModel _selectedProject = ProjectModel.Empty();
 
         public ProjectsViewModel(
             IProjectRepository projectRepository,
-            IMapper<Project, ProjectModel> mapper, IValidator<ProjectModel> projectValidator)
+            IMapper<Project, ProjectModel> mapper,
+            IValidator<ProjectModel> projectValidator)
         {
             _projectRepository = projectRepository;
             _mapper = mapper;
             _projectValidator = projectValidator;
-            LoadProjects();
+        }
+
+        public BindableCollection<ProjectModel> Projects => LoadProjects();
+
+        public bool EditMode
+        {
+            get => _editMode;
+            set
+            {
+                _editMode = value;
+                EditOrCreateText = _editMode ? "Edit" : "Create";
+                NotifyOfPropertyChange(() => EditMode);
+            }
+        }
+
+        public string EditOrCreateText
+        {
+            get => _editOrCreateText;
+            set
+            {
+                _editOrCreateText = value;
+                NotifyOfPropertyChange(() => EditOrCreateText);
+            }
         }
 
         public string Name
         {
-            get => _name;
+            get => _selectedProject.Name;
             set
             {
-                _name = value;
-                NotifyOfPropertyChange(() => _name);
+                _selectedProject.Name = value;
+                NotifyOfPropertyChange(() => _selectedProject.Name);
+            }
+        }
+
+        public ProjectModel SelectedProject
+        {
+            get => _selectedProject;
+            set
+            {
+                _selectedProject = value ?? ProjectModel.Empty();
+                NotifyOfPropertyChange(() => _selectedProject.PublicId);
+                NotifyOfPropertyChange(() => _selectedProject.Name);
+                NotifyOfPropertyChange(() => _selectedProject.StartDate);
+                NotifyOfPropertyChange(() => _selectedProject.Priority);
+                NotifyOfPropertyChange(() => _selectedProject.EndDate);
+                NotifyOfPropertyChange(() => _selectedProject.TaskLimit);
+                EditMode = _selectedProject.PublicId != Guid.Empty;
+            }
+        }
+
+        public Guid PublicId
+        {
+            get => _selectedProject.PublicId;
+            set
+            {
+                _selectedProject.PublicId = value;
+                NotifyOfPropertyChange(() => _selectedProject.PublicId);
             }
         }
 
         public DateTime StartDate
         {
-            get => _startDate;
+            get => _selectedProject.StartDate;
             set
             {
-                _startDate = value;
-                NotifyOfPropertyChange(() => _startDate);
+                _selectedProject.StartDate = value;
+                NotifyOfPropertyChange(() => _selectedProject.StartDate);
             }
         }
 
         public DateTime? EndDate
         {
-            get => _endDate;
+            get => _selectedProject.EndDate;
             set
             {
-                _endDate = value;
-                NotifyOfPropertyChange(() => _endDate);
+                _selectedProject.EndDate = value;
+                NotifyOfPropertyChange(() => _selectedProject.EndDate);
             }
         }
 
         public ProjectPriority Priority
         {
-            get => _priority;
+            get => _selectedProject.Priority;
             set
             {
-                _priority = value;
-                NotifyOfPropertyChange(() => _priority);
-            }
-        }
-
-        public BindableCollection<ProjectModel> Projects
-        {
-            get => _projects;
-            set
-            {
-                _projects = value;
-                NotifyOfPropertyChange(() => Projects);
+                _selectedProject.Priority = value;
+                NotifyOfPropertyChange(() => _selectedProject.Priority);
             }
         }
 
         public int? TaskLimit
         {
-            get => _taskLimit;
+            get => _selectedProject.TaskLimit;
             set
             {
-                _taskLimit = value;
-                NotifyOfPropertyChange(() => _taskLimit);
+                _selectedProject.TaskLimit = value;
+                NotifyOfPropertyChange(() => _selectedProject.TaskLimit);
             }
         }
 
-        public void Create()
-        {
-            var projectModel = new ProjectModel(
-                Guid.NewGuid(), 
-                Name,
-                StartDate,
-                EndDate,
-                Priority,
-                TaskLimit);
 
-            var validationResult = _projectValidator.Validate(projectModel);
+        public void CreateOrUpdate()
+        {
+            if (EditMode)
+                Update();
+            else
+                Create();
+        }
+
+        private void Update()
+        {
+            var project = _projectRepository.Get(_selectedProject.PublicId);
+            project.Update(
+                _selectedProject.Name,
+                _selectedProject.StartDate,
+                _selectedProject.EndDate,
+                _selectedProject.Priority,
+                _selectedProject.TaskLimit);
+            _projectRepository.Update(project);
+            _projectRepository.Commit();
+
+            NotifyOfPropertyChange(() => Projects);
+            MessageBox.Show($"Project {SelectedProject.Name} updated");
+        }
+
+        private void Create()
+        {
+            var validationResult = _projectValidator.Validate(SelectedProject);
             if (!validationResult.IsValid)
             {
                 var errorMessage = validationResult.GetErrorsSummary();
@@ -113,24 +169,33 @@ namespace Hoursly.ViewModels
             }
 
             var project = Project.Create(
-                projectModel.PublicId,
-                projectModel.Name, 
-                projectModel.StartDate,
-                projectModel.EndDate,
-                projectModel.Priority, 
-                projectModel.TaskLimit);
+                SelectedProject.Name,
+                SelectedProject.StartDate,
+                SelectedProject.EndDate,
+                SelectedProject.Priority,
+                SelectedProject.TaskLimit);
             _projectRepository.Create(project);
+            _projectRepository.Commit();
 
-            LoadProjects();
-            MessageBox.Show($"Project {projectModel.Name} added");
+            NotifyOfPropertyChange(() => Projects);
+            MessageBox.Show($"Project {SelectedProject.Name} added");
         }
 
-        private void LoadProjects()
+        public void Delete()
+        {
+            SelectedProject.ThrowIfPublicIdIsNullOrEmpty();
+            _projectRepository.Delete(_selectedProject.PublicId);
+            _projectRepository.Commit();
+            MessageBox.Show($"Project {SelectedProject.Name} Removed");
+            NotifyOfPropertyChange(() => Projects);
+        }
+
+        private BindableCollection<ProjectModel> LoadProjects()
         {
             var projects = _projectRepository.GetAll();
             var projectModels = projects.Select(project => _mapper.MapFrom(project));
-            _projects.Clear();
-            _projects.AddRange(projectModels);
+
+            return new BindableCollection<ProjectModel>(projectModels);
         }
     }
 }

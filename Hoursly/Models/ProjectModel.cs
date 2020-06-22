@@ -4,7 +4,7 @@ using Hoursly.Entities;
 
 namespace Hoursly.Models
 {
-    public class ProjectModel
+    public class ProjectModel : BaseModel
     {
         public ProjectModel(
             Guid publicId,
@@ -12,9 +12,8 @@ namespace Hoursly.Models
             DateTime startDate,
             DateTime? endDate = null,
             ProjectPriority priority = ProjectPriority.Low,
-            int? taskLimit = null)
+            int? taskLimit = null) : base(publicId)
         {
-            PublicId = publicId;
             Tasks = new ObservableCollection<TaskModel>();
             Name = name;
             StartDate = startDate;
@@ -23,12 +22,19 @@ namespace Hoursly.Models
             TaskLimit = taskLimit;
         }
 
-        public Guid PublicId { get; }
-        public string Name { get; }
-        public DateTime StartDate { get; }
-        public DateTime? EndDate { get; }
-        public ProjectPriority Priority { get; }
-        public int? TaskLimit { get; }
+        public static ProjectModel Empty()
+        {
+            return new ProjectModel(
+                Guid.Empty,
+                string.Empty,
+                DateTime.Now);
+        }
+
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public ProjectPriority Priority { get; set; }
+        public int? TaskLimit { get; set; }
         private ObservableCollection<TaskModel> Tasks { get; }
     }
 }

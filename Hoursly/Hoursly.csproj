@@ -129,14 +129,17 @@
     </ApplicationDefinition>
     <Compile Include="Common\Extensions\DependencyInjection\DependencyInjectionExtentions.cs" />
     <Compile Include="Common\Extensions\Enums\EnumBindingSourceExtension.cs" />
+    <Compile Include="Common\Extensions\Models\ModelsExtensions.cs" />
     <Compile Include="Common\Extensions\Validations\ValidationResultExtensions.cs" />
     <Compile Include="Common\Helpers\HourslyConfiguration.cs" />
     <Compile Include="Database\DatabaseMigrator.cs" />
     <Compile Include="Database\IDatabaseMigrator.cs" />
     <EmbeddedResource Include="Database\Scripts\001_Create_ProjectsTable.sql" />
+    <Compile Include="Common\IUniqueIdentifier.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Mappers\Common\IMapper.cs" />
     <Compile Include="Mappers\ProjectsMapper.cs" />
+    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Repositories\Common\BaseRepository.cs" />
@@ -185,6 +188,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -4,6 +4,7 @@ using Caliburn.Micro;
 using FluentValidation;
 using Hoursly.Database;
 using Hoursly.Mappers.Common;
+using Hoursly.Repositories.Common;
 
 namespace Hoursly.Common.Extensions.DependencyInjection
 {
@@ -48,8 +49,7 @@ namespace Hoursly.Common.Extensions.DependencyInjection
         public static void AddDatabase(this ContainerBuilder builder)
         {
             builder.RegisterType<DatabaseMigrator>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<HourslyDbContex>().AsSelf().InstancePerLifetimeScope();
         }
-
-
     }
 }

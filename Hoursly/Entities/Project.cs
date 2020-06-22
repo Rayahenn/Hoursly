@@ -1,8 +1,9 @@
 ﻿using System;
+using Hoursly.Common;
 
 namespace Hoursly.Entities
 {
-    public class Project
+    public class Project : IUniqueIdentifier
     {
         public Project()
         {
@@ -10,14 +11,13 @@ namespace Hoursly.Entities
         }
 
         public Project(
-            Guid publicId,
             string name,
             DateTime startDate,
             DateTime? endDate,
             ProjectPriority priority,
             int? taskLimit)
         {
-            PublicId = publicId;
+            PublicId = Guid.NewGuid();
             Name = name;
             StartDate = startDate;
             EndDate = endDate;
@@ -26,14 +26,32 @@ namespace Hoursly.Entities
         }
 
         public static Project Create(
-            Guid publicId,
             string name,
             DateTime startDate,
             DateTime? endDate,
             ProjectPriority priority,
             int? taskLimit)
         {
-            return new Project(publicId, name, startDate, endDate, priority, taskLimit);
+            return new Project(
+                name,
+                startDate,
+                endDate,
+                priority,
+                taskLimit);
+        }
+
+        public void Update(
+            string name,
+            DateTime startDate,
+            DateTime? endDate,
+            ProjectPriority priority,
+            int? taskLimit)
+        {
+            Name = name;
+            StartDate = startDate;
+            EndDate = endDate;
+            Priority = priority;
+            TaskLimit = taskLimit;
         }
 
         public long Id { get; set; }

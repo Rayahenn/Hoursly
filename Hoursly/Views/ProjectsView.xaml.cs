@@ -39,5 +39,10 @@ namespace Hoursly.Views
         {
 
         }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
