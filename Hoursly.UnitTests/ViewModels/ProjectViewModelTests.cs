@@ -94,7 +94,7 @@ namespace Hoursly.UnitTests.ViewModels
 
             //Assert
             _projectsViewModel.EditMode.ShouldBeFalse();
-            _projectsViewModel.SelectedProject.AssertEqual( emptyModel);
+            _projectsViewModel.SelectedProject.AssertEquals(emptyModel);
         }
 
         [Fact]
@@ -128,7 +128,7 @@ namespace Hoursly.UnitTests.ViewModels
 
             //Assert
             var projectInDb = ProjectRepository.Get(notEditedModel.PublicId);
-            projectInDb.AssertEqual(notEditedModel);
+            projectInDb.AssertEntityEqualsProjectModel(notEditedModel);
         }
 
         [Fact]
@@ -166,7 +166,7 @@ namespace Hoursly.UnitTests.ViewModels
 
             //Assert
             var projectInDb = ProjectRepository.Get(editedProjectModel.PublicId);
-            projectInDb.AssertEqual(editedProjectModel);
+            projectInDb.AssertEntityEqualsProjectModel(editedProjectModel);
         }
 
         [Fact]

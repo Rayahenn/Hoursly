@@ -6,7 +6,7 @@ namespace Hoursly.UnitTests.Common.Helpers
 {
     public static class ProjectAssertions
     {
-        public static void AssertEqual(this Project left, ProjectModel right)
+        public static void AssertEntityEqualsProjectModel(this Project left, ProjectModel right)
         {
             left.Name.ShouldBe(right.Name);
             left.StartDate.ShouldBe(right.StartDate);
@@ -15,7 +15,7 @@ namespace Hoursly.UnitTests.Common.Helpers
             left.TaskLimit.ShouldBe(right.TaskLimit);
         }
 
-        public static void AssertEqual(this ProjectModel left, ProjectModel right)
+        public static void AssertEquals(this ProjectModel left, ProjectModel right)
         {
             left.PublicId.ShouldBe(right.PublicId);
             left.Name.ShouldBe(right.Name);

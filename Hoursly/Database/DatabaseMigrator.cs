@@ -7,14 +7,14 @@ namespace Hoursly.Database
     {
         public void MigrateDatabase(string connectionString)
         {
-            var upgrader =
+            var upgradeEngine =
                 DeployChanges.To
                     .SQLiteDatabase(connectionString)
                     .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
                     .LogToConsole()
                     .Build();
 
-            upgrader.PerformUpgrade();
+            upgradeEngine.PerformUpgrade();
         }
     }
 }
