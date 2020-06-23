@@ -22,6 +22,13 @@ namespace Hoursly.Models
             TaskLimit = taskLimit;
         }
 
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public ProjectPriority Priority { get; set; }
+        public int? TaskLimit { get; set; }
+        private ObservableCollection<TaskModel> Tasks { get; }
+
         public static ProjectModel Empty()
         {
             return new ProjectModel(
@@ -29,12 +36,5 @@ namespace Hoursly.Models
                 string.Empty,
                 DateTime.Now);
         }
-
-        public string Name { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public ProjectPriority Priority { get; set; }
-        public int? TaskLimit { get; set; }
-        private ObservableCollection<TaskModel> Tasks { get; }
     }
 }

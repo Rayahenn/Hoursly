@@ -10,7 +10,7 @@ namespace Hoursly.Mappers
         {
             return new ProjectModel(
                 source.PublicId,
-                source.Name, 
+                source.Name,
                 source.StartDate,
                 source.EndDate,
                 source.Priority,

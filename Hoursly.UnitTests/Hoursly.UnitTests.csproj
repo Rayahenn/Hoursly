@@ -91,7 +91,7 @@
     <Compile Include="Common\ProjectInMemoryRepository.cs" />
     <Compile Include="Common\ValidationResultMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\ProjectMapperTests.cs" />
+    <Compile Include="Mappers\ProjectMapperTests.cs" />
     <Compile Include="ViewModels\BaseProjectsTest.cs" />
     <Compile Include="ViewModels\ProjectViewModelTests.cs" />
   </ItemGroup>
@@ -99,9 +99,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mappers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>

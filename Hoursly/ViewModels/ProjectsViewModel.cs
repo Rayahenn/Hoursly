@@ -21,7 +21,7 @@ namespace Hoursly.ViewModels
         private readonly ISystemMessageSender _systemMessageSender;
 
         private bool _editMode;
-        private string _editOrCreateText;
+        private string _editOrCreateText = TextConstants.Create;
         private ProjectModel _selectedProject = ProjectModel.Empty();
 
         public ProjectsViewModel(

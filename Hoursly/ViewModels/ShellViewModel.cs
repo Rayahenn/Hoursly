@@ -1,6 +1,4 @@
 ﻿using Caliburn.Micro;
-using Hoursly.Database;
-using Hoursly.Repositories;
 
 namespace Hoursly.ViewModels
 {
