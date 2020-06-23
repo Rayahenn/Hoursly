@@ -12,7 +12,7 @@ namespace Hoursly
 {
     public class Bootstrapper : BootstrapperBase
     {
-        private  IContainer _container;
+        private IContainer _container;
 
         public Bootstrapper()
         {

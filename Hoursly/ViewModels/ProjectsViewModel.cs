@@ -5,6 +5,7 @@ using Caliburn.Micro;
 using FluentValidation;
 using Hoursly.Common.Extensions.Models;
 using Hoursly.Common.Extensions.Validations;
+using Hoursly.Common.Helpers;
 using Hoursly.Entities;
 using Hoursly.Mappers.Common;
 using Hoursly.Models;
@@ -42,7 +43,7 @@ namespace Hoursly.ViewModels
             set
             {
                 _editMode = value;
-                EditOrCreateText = _editMode ? "Edit" : "Create";
+                EditOrCreateText = _editMode ? TextConstants.Update : TextConstants.Create;
                 NotifyOfPropertyChange(() => EditMode);
             }
         }
@@ -189,6 +190,14 @@ namespace Hoursly.ViewModels
             MessageBox.Show($"Project {SelectedProject.Name} Removed");
             NotifyOfPropertyChange(() => Projects);
         }
+
+        public void ClearSelection()
+        {
+            MessageBox.Show("Debug");
+            SelectedProject = ProjectModel.Empty();
+            EditMode = false;
+        }
+
 
         private BindableCollection<ProjectModel> LoadProjects()
         {

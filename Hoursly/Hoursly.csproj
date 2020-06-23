@@ -131,6 +131,7 @@
     <Compile Include="Common\Extensions\Enums\EnumBindingSourceExtension.cs" />
     <Compile Include="Common\Extensions\Models\ModelsExtensions.cs" />
     <Compile Include="Common\Extensions\Validations\ValidationResultExtensions.cs" />
+    <Compile Include="Common\Helpers\TextConstants.cs" />
     <Compile Include="Common\Helpers\HourslyConfiguration.cs" />
     <Compile Include="Database\DatabaseMigrator.cs" />
     <Compile Include="Database\IDatabaseMigrator.cs" />
