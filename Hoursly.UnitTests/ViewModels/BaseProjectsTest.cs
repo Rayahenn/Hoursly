@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hoursly.Entities;
 using Hoursly.Models;
 using Hoursly.Repositories;
@@ -46,10 +47,10 @@ namespace Hoursly.UnitTests.ViewModels
             ProjectRepository.Commit();
         }
 
-        protected static ProjectModel GetProjectModel(Project fakeValidProject)
+        private static ProjectModel GetProjectModel(Project fakeValidProject, bool publicIdIsEmpty)
         {
             return new ProjectModel(
-                Guid.Empty,
+                publicIdIsEmpty ? Guid.Empty : fakeValidProject.PublicId,
                 fakeValidProject.Name,
                 fakeValidProject.StartDate,
                 fakeValidProject.EndDate,
@@ -57,7 +58,23 @@ namespace Hoursly.UnitTests.ViewModels
                 fakeValidProject.TaskLimit);
         }
 
-        protected void AssertAreProjects()
+        protected static ProjectModel GetFakeProjectModel()
+        {
+            var fakeValidProject = GetFakeProjects(1).First();
+            var fakeValidProjectModel = GetProjectModel(fakeValidProject, true);
+            return fakeValidProjectModel;
+        }
+
+        protected ProjectModel SeedFakeProject()
+        {
+            var fakeValidProject = GetFakeProjects(1).First();
+            ProjectRepository.Create(fakeValidProject);
+            ProjectRepository.Commit();
+            var fakeValidProjectModel = GetProjectModel(fakeValidProject, false);
+            return fakeValidProjectModel;
+        }
+
+        protected void AssertAreProjectsEmpty()
         {
             ProjectRepository.GetAll().Count.ShouldBe(0);
         }

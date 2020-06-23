@@ -1,5 +1,4 @@
 ﻿using System;
-using Hoursly.Common;
 using Hoursly.Common.Decorators;
 
 namespace Hoursly.Entities
@@ -25,6 +24,14 @@ namespace Hoursly.Entities
             Priority = priority;
             TaskLimit = taskLimit;
         }
+
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public ProjectPriority Priority { get; set; }
+        public int? TaskLimit { get; set; }
+        public Guid PublicId { get; set; }
 
         public static Project Create(
             string name,
@@ -54,13 +61,5 @@ namespace Hoursly.Entities
             Priority = priority;
             TaskLimit = taskLimit;
         }
-
-        public long Id { get; set; }
-        public Guid PublicId { get; set; }
-        public string Name { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public ProjectPriority Priority { get; set; }
-        public int? TaskLimit { get; set; }
     }
 }
