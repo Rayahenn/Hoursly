@@ -94,7 +94,7 @@ namespace Hoursly.UnitTests.ViewModels
 
             //Assert
             _projectsViewModel.EditMode.ShouldBeFalse();
-            _projectsViewModel.SelectedProject = emptyModel;
+            _projectsViewModel.SelectedProject.AssertEqual( emptyModel);
         }
 
         [Fact]
