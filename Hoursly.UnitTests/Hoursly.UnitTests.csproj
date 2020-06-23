@@ -87,11 +87,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Helpers\ProjectAssertions.cs" />
+    <Compile Include="Common\Helpers\ProjectsTestHelper.cs" />
     <Compile Include="Common\InMemoryRepository.cs" />
     <Compile Include="Common\ProjectInMemoryRepository.cs" />
     <Compile Include="Common\ValidationResultMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mappers\ProjectMapperTests.cs" />
+    <Compile Include="Validators\ProjectValidator.cs" />
     <Compile Include="ViewModels\BaseProjectsTest.cs" />
     <Compile Include="ViewModels\ProjectViewModelTests.cs" />
   </ItemGroup>

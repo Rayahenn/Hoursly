@@ -61,7 +61,7 @@ namespace Hoursly.UnitTests.ViewModels
         [Trait("Category", "ChangeSelectedProject")]
         public void Given_ChangeSelectedProject_When_ModelPublicIdIsEmpty_Then_EditModeIsTrue()
         {
-            var fakeProjectModel = GetFakeProjectModel();
+            var fakeProjectModel = ProjectsTestHelper.GetFakeProjectModel();
 
             _projectsViewModel.SelectedProject = fakeProjectModel;
 
@@ -84,7 +84,7 @@ namespace Hoursly.UnitTests.ViewModels
         public void Given_ClearSelection_Then_SelectedProjectShouldBeEmptyAndEditModeShouldBeFalse()
         {
             //Arrange
-            var fakeProjectModel = GetFakeProjectModel();
+            var fakeProjectModel = ProjectsTestHelper.GetFakeProjectModel();
             _projectsViewModel.SelectedProject = fakeProjectModel;
             _projectsViewModel.EditMode = true;
             var emptyModel = ProjectModel.Empty();
@@ -102,7 +102,7 @@ namespace Hoursly.UnitTests.ViewModels
         public void Given_CreateOrUpdate_When_ModelIsInValidAndEditModeIsFalse_Then_ProjectIsNotCreated()
         {
             //Arrange
-            var fakeProjectModel = GetFakeProjectModel();
+            var fakeProjectModel = ProjectsTestHelper.GetFakeProjectModel();
             _projectsViewModel.SelectedProject = fakeProjectModel;
             SetupValidatorIsValid(false);
             AssertAreProjectsEmpty();
@@ -136,7 +136,7 @@ namespace Hoursly.UnitTests.ViewModels
         public void Given_CreateOrUpdate_When_ModelIsValidAndEditModeIsFalse_Then_ProjectIsCreated()
         {
             //Arrange
-            var fakeValidProjectModel = GetFakeProjectModel();
+            var fakeValidProjectModel = ProjectsTestHelper.GetFakeProjectModel();
             _projectsViewModel.SelectedProject = fakeValidProjectModel;
             SetupValidatorIsValid(true);
             AssertAreProjectsEmpty();
@@ -190,7 +190,7 @@ namespace Hoursly.UnitTests.ViewModels
         public void Given_Delete_When_ProjectNoExistInDb_Then_ThrowInvalidOperationException()
         {
             //Arrange
-            var noExistingProject = GetFakeProjectModel();
+            var noExistingProject = ProjectsTestHelper.GetFakeProjectModel();
             noExistingProject.PublicId = Guid.NewGuid();
             _projectsViewModel.SelectedProject = noExistingProject;
 
