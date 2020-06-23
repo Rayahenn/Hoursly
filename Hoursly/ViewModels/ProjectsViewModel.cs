@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Windows;
 using Caliburn.Micro;
 using FluentValidation;
 using Hoursly.Common.Extensions.Models;
 using Hoursly.Common.Extensions.Validations;
 using Hoursly.Common.Helpers;
+using Hoursly.Common.Messages;
 using Hoursly.Entities;
 using Hoursly.Mappers.Common;
 using Hoursly.Models;
@@ -18,21 +18,21 @@ namespace Hoursly.ViewModels
         private readonly IMapper<Project, ProjectModel> _mapper;
         private readonly IProjectRepository _projectRepository;
         private readonly IValidator<ProjectModel> _projectValidator;
+        private readonly ISystemMessageSender _systemMessageSender;
 
         private bool _editMode;
-
-
         private string _editOrCreateText;
         private ProjectModel _selectedProject = ProjectModel.Empty();
 
         public ProjectsViewModel(
             IProjectRepository projectRepository,
             IMapper<Project, ProjectModel> mapper,
-            IValidator<ProjectModel> projectValidator)
+            IValidator<ProjectModel> projectValidator, ISystemMessageSender systemMessageSender)
         {
             _projectRepository = projectRepository;
             _mapper = mapper;
             _projectValidator = projectValidator;
+            _systemMessageSender = systemMessageSender;
         }
 
         public BindableCollection<ProjectModel> Projects => LoadProjects();
@@ -156,7 +156,7 @@ namespace Hoursly.ViewModels
             _projectRepository.Commit();
 
             NotifyOfPropertyChange(() => Projects);
-            MessageBox.Show($"Project {SelectedProject.Name} updated");
+            _systemMessageSender.Send($"Project {SelectedProject.Name} updated");
         }
 
         private void Create()
@@ -165,7 +165,7 @@ namespace Hoursly.ViewModels
             if (!validationResult.IsValid)
             {
                 var errorMessage = validationResult.GetErrorsSummary();
-                MessageBox.Show(errorMessage);
+                _systemMessageSender.Send(errorMessage);
                 return;
             }
 
@@ -179,7 +179,7 @@ namespace Hoursly.ViewModels
             _projectRepository.Commit();
 
             NotifyOfPropertyChange(() => Projects);
-            MessageBox.Show($"Project {SelectedProject.Name} added");
+            _systemMessageSender.Send($"Project {SelectedProject.Name} added");
         }
 
         public void Delete()
@@ -187,13 +187,12 @@ namespace Hoursly.ViewModels
             SelectedProject.ThrowIfPublicIdIsNullOrEmpty();
             _projectRepository.Delete(_selectedProject.PublicId);
             _projectRepository.Commit();
-            MessageBox.Show($"Project {SelectedProject.Name} Removed");
+            _systemMessageSender.Send($"Project {SelectedProject.Name} Removed");
             NotifyOfPropertyChange(() => Projects);
         }
 
         public void ClearSelection()
         {
-            MessageBox.Show("Debug");
             SelectedProject = ProjectModel.Empty();
             EditMode = false;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Hoursly.Common;
+using Hoursly.Common.Decorators;
 
 namespace Hoursly.Entities
 {
@@ -61,12 +62,5 @@ namespace Hoursly.Entities
         public DateTime? EndDate { get; set; }
         public ProjectPriority Priority { get; set; }
         public int? TaskLimit { get; set; }
-    }
-
-    public enum ProjectPriority
-    {
-        Low,
-        Medium,
-        High
     }
 }

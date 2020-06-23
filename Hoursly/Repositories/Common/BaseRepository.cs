@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Hoursly.Common;
+using Hoursly.Common.Decorators;
 
 namespace Hoursly.Repositories.Common
 {

@@ -2,6 +2,7 @@
 using Autofac;
 using Caliburn.Micro;
 using FluentValidation;
+using Hoursly.Common.Messages;
 using Hoursly.Database;
 using Hoursly.Mappers.Common;
 using Hoursly.Repositories.Common;
@@ -50,6 +51,11 @@ namespace Hoursly.Common.Extensions.DependencyInjection
         {
             builder.RegisterType<DatabaseMigrator>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<HourslyDbContex>().AsSelf().InstancePerLifetimeScope();
+        }
+
+        public static void AddSystemUtilities(this ContainerBuilder builder)
+        {
+            builder.RegisterType<SystemMessageSender>().AsImplementedInterfaces().SingleInstance();
         }
     }
 }

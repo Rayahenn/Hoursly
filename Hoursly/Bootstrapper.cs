@@ -33,6 +33,7 @@ namespace Hoursly
             builder.AddCaliburn();
             builder.AddMappers();
             builder.AddDatabase();
+            builder.AddSystemUtilities();
             builder.AddRepositories(currentAssembly);
             builder.AddValidators(currentAssembly);
             builder.AddViewModels(currentAssembly);

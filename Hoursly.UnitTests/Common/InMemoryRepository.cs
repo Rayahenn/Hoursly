@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hoursly.Common;
+using Hoursly.Common.Decorators;
 using Hoursly.Repositories.Common;
 
 namespace Hoursly.UnitTests.Common

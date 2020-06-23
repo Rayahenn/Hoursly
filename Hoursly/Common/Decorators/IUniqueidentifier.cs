@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hoursly.Common
+namespace Hoursly.Common.Decorators
 {
     public interface IUniqueIdentifier
     {

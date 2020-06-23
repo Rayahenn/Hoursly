@@ -1,4 +1,5 @@
 ﻿using System;
+using Hoursly.Common.Decorators;
 
 namespace Hoursly.Common.Extensions.Models
 {

@@ -24,11 +24,4 @@ namespace Hoursly.Models
         public ProjectPriority Priority { get; }
         public TaskStatus Status { get; }
     }
-
-    public enum TaskStatus
-    {
-        Todo,
-        InProgress,
-        Completed
-    }
 }
