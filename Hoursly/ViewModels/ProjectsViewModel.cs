@@ -9,7 +9,7 @@ using Hoursly.Common.Messages;
 using Hoursly.Entities;
 using Hoursly.Mappers.Common;
 using Hoursly.Models;
-using Hoursly.Repositories;
+using Hoursly.Repositories.Projects;
 
 namespace Hoursly.ViewModels
 {
@@ -27,7 +27,8 @@ namespace Hoursly.ViewModels
         public ProjectsViewModel(
             IProjectRepository projectRepository,
             IMapper<Project, ProjectModel> mapper,
-            IValidator<ProjectModel> projectValidator, ISystemMessageSender systemMessageSender)
+            IValidator<ProjectModel> projectValidator,
+            ISystemMessageSender systemMessageSender)
         {
             _projectRepository = projectRepository;
             _mapper = mapper;
@@ -134,6 +135,16 @@ namespace Hoursly.ViewModels
             }
         }
 
+        public string SupervisorEmail
+        {
+            get => _selectedProject.SupervisorEmail;
+            set
+            {
+                _selectedProject.SupervisorEmail = value;
+                NotifyOfPropertyChange(() => _selectedProject.SupervisorEmail);
+            }
+        }
+
 
         public void CreateOrUpdate()
         {
@@ -151,7 +162,8 @@ namespace Hoursly.ViewModels
                 _selectedProject.StartDate,
                 _selectedProject.EndDate,
                 _selectedProject.Priority,
-                _selectedProject.TaskLimit);
+                _selectedProject.TaskLimit,
+                _selectedProject.SupervisorEmail);
             _projectRepository.Update(project);
             _projectRepository.Commit();
 
@@ -174,7 +186,8 @@ namespace Hoursly.ViewModels
                 SelectedProject.StartDate,
                 SelectedProject.EndDate,
                 SelectedProject.Priority,
-                SelectedProject.TaskLimit);
+                SelectedProject.TaskLimit,
+                SelectedProject.SupervisorEmail);
             _projectRepository.Create(project);
             _projectRepository.Commit();
 
@@ -187,7 +200,7 @@ namespace Hoursly.ViewModels
             SelectedProject.ThrowIfPublicIdIsNullOrEmpty();
             _projectRepository.Delete(_selectedProject.PublicId);
             _projectRepository.Commit();
-            _systemMessageSender.Send($"Project {SelectedProject.Name} Removed");
+            _systemMessageSender.Send($"Project {SelectedProject.Name} removed");
             NotifyOfPropertyChange(() => Projects);
         }
 

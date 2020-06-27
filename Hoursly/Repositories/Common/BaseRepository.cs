@@ -8,21 +8,21 @@ namespace Hoursly.Repositories.Common
 {
     public abstract class BaseRepository<TEntity> where TEntity : class, IUniqueIdentifier
     {
-        private readonly HourslyDbContex _dbContex;
+        protected readonly HourslyDbContex DbContex;
 
         protected BaseRepository(HourslyDbContex dbContex)
         {
-            _dbContex = dbContex;
+            DbContex = dbContex;
         }
 
         public List<TEntity> GetAll()
         {
-            return _dbContex.Set<TEntity>().AsNoTracking().ToList();
+            return DbContex.Set<TEntity>().AsNoTracking().ToList();
         }
 
         public TEntity Get(Guid publicId)
         {
-            return _dbContex.Set<TEntity>()
+            return DbContex.Set<TEntity>()
                 .AsNoTracking()
                 .ToList()
                 .Single(x => x.PublicId == publicId);
@@ -30,23 +30,23 @@ namespace Hoursly.Repositories.Common
 
         public void Create(TEntity entity)
         {
-            _dbContex.Set<TEntity>().Add(entity);
+            DbContex.Set<TEntity>().Add(entity);
         }
 
         public void Update(TEntity entity)
         {
-            _dbContex.Entry(entity).State = EntityState.Modified;
+            DbContex.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(Guid publicId)
         {
-            var entity = _dbContex.Set<TEntity>().ToList().Single(x => x.PublicId == publicId);
-            _dbContex.Set<TEntity>().Remove(entity);
+            var entity = DbContex.Set<TEntity>().ToList().Single(x => x.PublicId == publicId);
+            DbContex.Set<TEntity>().Remove(entity);
         }
 
         public void Commit()
         {
-            _dbContex.SaveChanges();
+            DbContex.SaveChanges();
         }
     }
 }

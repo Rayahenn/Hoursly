@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using Hoursly.Entities;
 
 namespace Hoursly.Models
@@ -10,16 +9,17 @@ namespace Hoursly.Models
             Guid publicId,
             string name,
             DateTime startDate,
+            string supervisorEmail,
             DateTime? endDate = null,
             ProjectPriority priority = ProjectPriority.Low,
             int? taskLimit = null) : base(publicId)
         {
-            Tasks = new ObservableCollection<TaskModel>();
             Name = name;
             StartDate = startDate;
             EndDate = endDate;
             Priority = priority;
             TaskLimit = taskLimit;
+            SupervisorEmail = supervisorEmail;
         }
 
         public string Name { get; set; }
@@ -27,14 +27,15 @@ namespace Hoursly.Models
         public DateTime? EndDate { get; set; }
         public ProjectPriority Priority { get; set; }
         public int? TaskLimit { get; set; }
-        private ObservableCollection<TaskModel> Tasks { get; }
+        public string SupervisorEmail { get; set; }
 
         public static ProjectModel Empty()
         {
             return new ProjectModel(
                 Guid.Empty,
                 string.Empty,
-                DateTime.Now);
+                DateTime.Now,
+                string.Empty);
         }
     }
 }

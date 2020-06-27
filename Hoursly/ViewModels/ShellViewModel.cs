@@ -5,9 +5,12 @@ namespace Hoursly.ViewModels
     public class ShellViewModel : Conductor<object>
     {
         private readonly ProjectsViewModel _projectsViewModel;
+        private readonly ReportsViewModel _reportsViewModel;
 
-        public ShellViewModel(ProjectsViewModel projectsView)
+        public ShellViewModel(ProjectsViewModel projectsView,
+            ReportsViewModel reportsViewModel)
         {
+            _reportsViewModel = reportsViewModel;
             _projectsViewModel = projectsView;
             ShowProjectsView();
         }
@@ -15,7 +18,7 @@ namespace Hoursly.ViewModels
 
         public void ShowReportsView()
         {
-            ActivateItem(new ReportsViewModel());
+            ActivateItem(_reportsViewModel);
         }
 
         public void ShowProjectsView()

@@ -4,7 +4,7 @@ using Hoursly.Models;
 
 namespace Hoursly.Mappers
 {
-    public class ProjectsMapper : IMapper<Project, ProjectModel>
+    public class ProjectToProjectModelMapper : IMapper<Project, ProjectModel>
     {
         public ProjectModel MapFrom(Project source)
         {
@@ -12,6 +12,7 @@ namespace Hoursly.Mappers
                 source.PublicId,
                 source.Name,
                 source.StartDate,
+                source.SupervisorEmail,
                 source.EndDate,
                 source.Priority,
                 source.TaskLimit);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Hoursly.Common.Decorators;
 
 namespace Hoursly.Entities
@@ -15,7 +16,8 @@ namespace Hoursly.Entities
             DateTime startDate,
             DateTime? endDate,
             ProjectPriority priority,
-            int? taskLimit)
+            int? taskLimit,
+            string supervisorEmail)
         {
             PublicId = Guid.NewGuid();
             Name = name;
@@ -23,14 +25,18 @@ namespace Hoursly.Entities
             EndDate = endDate;
             Priority = priority;
             TaskLimit = taskLimit;
+            SupervisorEmail = supervisorEmail;
+            TimeLogs = new HashSet<TimeLog>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public ProjectPriority Priority { get; set; }
         public int? TaskLimit { get; set; }
+        public string SupervisorEmail { get; set; }
+        public ICollection<TimeLog> TimeLogs { get; set; }
         public Guid PublicId { get; set; }
 
         public static Project Create(
@@ -38,14 +44,24 @@ namespace Hoursly.Entities
             DateTime startDate,
             DateTime? endDate,
             ProjectPriority priority,
-            int? taskLimit)
+            int? taskLimit,
+            string supervisorEmail)
         {
             return new Project(
                 name,
                 startDate,
                 endDate,
                 priority,
-                taskLimit);
+                taskLimit,
+                supervisorEmail);
+        }
+
+        public void LogTime(
+            DateTime startDate,
+            DateTime endDate)
+        {
+            var timeLog = TimeLog.Create(this, startDate, endDate);
+            TimeLogs.Add(timeLog);
         }
 
         public void Update(
@@ -53,13 +69,15 @@ namespace Hoursly.Entities
             DateTime startDate,
             DateTime? endDate,
             ProjectPriority priority,
-            int? taskLimit)
+            int? taskLimit,
+            string supervisorEmail)
         {
             Name = name;
             StartDate = startDate;
             EndDate = endDate;
             Priority = priority;
             TaskLimit = taskLimit;
+            SupervisorEmail = supervisorEmail;
         }
     }
 }

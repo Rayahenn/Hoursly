@@ -13,7 +13,7 @@
     <Grid Margin="0,-10,0,10">
         <Button Content="{Binding EditOrCreateText}"
                 HorizontalAlignment="Left"
-                Margin="567,217,0,0"
+                Margin="592,244,0,0"
                 VerticalAlignment="Top"
                 Width="75"
                 x:Name="CreateOrUpdate" />
@@ -31,36 +31,36 @@
             x:Name="Name"
             HorizontalAlignment="Left"
             Height="22"
-            Margin="522,76,0,0"
+            Margin="547,76,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="120" />
-        <Label Content="Name" HorizontalAlignment="Left" Margin="484,75,0,0" VerticalAlignment="Top" Width="38"
+        <Label Content="Name" HorizontalAlignment="Left" Margin="498,75,0,0" VerticalAlignment="Top" Width="38"
                FontSize="9" />
-        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="522,104,0,0" VerticalAlignment="Top"
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="547,104,0,0" VerticalAlignment="Top"
                     Width="120" />
-        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="522,133,0,0" VerticalAlignment="Top"
+        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="547,133,0,0" VerticalAlignment="Top"
                     Width="120" />
         <ComboBox HorizontalAlignment="Left"
                   SelectedValue="{Binding Path=Priority}"
                   ItemsSource="{Binding Source={enums:EnumBindingSource {x:Type entities:ProjectPriority}}}"
-                  Margin="522,162,0,0" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="TaskLimit" HorizontalAlignment="Left" Height="23" Margin="522,189,0,0" TextWrapping="Wrap"
+                  Margin="547,162,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="TaskLimit" HorizontalAlignment="Left" Height="23" Margin="547,189,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label Content="Start Date" HorizontalAlignment="Left" Margin="467,104,0,0" VerticalAlignment="Top" Width="55"
+        <Label Content="Start Date" HorizontalAlignment="Left" Margin="481,104,0,0" VerticalAlignment="Top" Width="55"
                FontSize="9" />
-        <Label Content="End Date" HorizontalAlignment="Left" Margin="475,133,0,0" VerticalAlignment="Top" Width="47"
+        <Label Content="End Date" HorizontalAlignment="Left" Margin="489,133,0,0" VerticalAlignment="Top" Width="47"
                FontSize="9" RenderTransformOrigin="0.045,-0.227" />
-        <Label Content="Priority" HorizontalAlignment="Left" Margin="478,162,0,0" VerticalAlignment="Top" Width="44"
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="492,162,0,0" VerticalAlignment="Top" Width="44"
                FontSize="9" />
-        <Label Content="Task Limit" HorizontalAlignment="Left" Margin="467,189,0,0" VerticalAlignment="Top" Width="55"
+        <Label Content="Task Limit" HorizontalAlignment="Left" Margin="481,189,0,0" VerticalAlignment="Top" Width="55"
                FontSize="9" />
         <Label Content="Projekty" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" />
         <Button Content="Delete"
                 x:Name="Delete"
                 IsEnabled="{Binding EditMode, Mode=TwoWay}"
                 HorizontalAlignment="Left"
-                Margin="484,217,0,0"
+                Margin="509,244,0,0"
                 VerticalAlignment="Top"
                 Width="75" />
         <Button Content="Clear Selection"
@@ -70,5 +70,11 @@
                 Margin="25,330,0,0"
                 VerticalAlignment="Top"
                 Width="88" />
+        <TextBox x:Name="SupervisorEmail" HorizontalAlignment="Left" Height="23" Margin="547,216,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" />
+        <Label Content="Supervisor Email" HorizontalAlignment="Left" Margin="467,216,0,0" VerticalAlignment="Top"
+               Width="80"
+               FontSize="9" />
     </Grid>
 </UserControl>

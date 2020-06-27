@@ -1,7 +1,7 @@
 ﻿using Hoursly.Entities;
 using Hoursly.Repositories.Common;
 
-namespace Hoursly.Repositories
+namespace Hoursly.Repositories.Projects
 {
     public interface IProjectRepository : IBaseRepository<Project>
     {

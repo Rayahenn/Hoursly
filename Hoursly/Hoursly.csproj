@@ -77,6 +77,12 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=4.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.4.3.0\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.3.5.8\lib\35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PersianCalendarWPF, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PersianCalendarWPF.1.2.1\lib\net40\PersianCalendarWPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
@@ -121,6 +127,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -138,19 +159,22 @@
     <Compile Include="Common\Decorators\IUniqueIdentifier.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\ProjectPriority.cs" />
+    <Compile Include="Entities\TimeLog.cs" />
     <Compile Include="Mappers\Common\IMapper.cs" />
-    <Compile Include="Mappers\ProjectsMapper.cs" />
+    <Compile Include="Mappers\ProjectToProjectModelMapper.cs" />
+    <Compile Include="Mappers\ProjectToProjectTimeLogsModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
-    <Compile Include="Models\TaskModel.cs" />
-    <Compile Include="Models\TaskStatus.cs" />
+    <Compile Include="Models\ProjectTimeLogsModel.cs" />
+    <Compile Include="Models\TimeLogModel.cs" />
     <Compile Include="Repositories\Common\BaseRepository.cs" />
     <Compile Include="Repositories\Common\Configuration.cs" />
     <Compile Include="Repositories\Common\HourslyDbContex.cs" />
     <Compile Include="Repositories\Common\IBaseRepository.cs" />
-    <Compile Include="Repositories\IProjectRepository.cs" />
-    <Compile Include="Repositories\ProjectRepository.cs" />
+    <Compile Include="Repositories\Projects\IProjectRepository.cs" />
+    <Compile Include="Repositories\Projects\ProjectRepository.cs" />
     <Compile Include="Validators\ProjectValidator.cs" />
+    <Compile Include="Validators\TimeLogValidator.cs" />
     <Compile Include="ViewModels\ProjectsViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -159,7 +183,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="ViewModels\TasksViewModel.cs" />
     <Compile Include="Views\ProjectsView.xaml.cs">
       <DependentUpon>ProjectsView.xaml</DependentUpon>
     </Compile>
@@ -199,6 +222,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\events.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -227,6 +251,7 @@
       <Name>Hoursly.Database</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

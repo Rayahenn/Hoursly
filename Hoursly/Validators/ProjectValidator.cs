@@ -16,6 +16,7 @@ namespace Hoursly.Validators
                 }).Must(dates => dates.EndDate.HasValue && dates.EndDate > dates.StartDate)
                 .WithMessage("End date must be greater than Start date");
             RuleFor(project => project.TaskLimit).GreaterThan(0);
+            RuleFor(project => project.SupervisorEmail).EmailAddress();
         }
     }
 }
