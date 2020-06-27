@@ -12,7 +12,7 @@ namespace Hoursly.UnitTests.Mappers
     {
         public ProjectMapperTests()
         {
-            _mapper = new ProjectsMapper();
+            _mapper = new ProjectToProjectModelMapper();
         }
 
         private readonly IMapper<Project, ProjectModel> _mapper;
@@ -27,7 +27,9 @@ namespace Hoursly.UnitTests.Mappers
                 new DateTime(2011, 2, 2),
                 new DateTime(200, 3, 4),
                 ProjectPriority.High,
-                2);
+                2,
+                "test@mail.com"
+            );
 
             //Act
             var projectModel = _mapper.MapFrom(project);

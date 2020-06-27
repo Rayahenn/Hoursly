@@ -1,5 +1,5 @@
 ﻿using Hoursly.Entities;
-using Hoursly.Repositories;
+using Hoursly.Repositories.Projects;
 
 namespace Hoursly.UnitTests.Common
 {

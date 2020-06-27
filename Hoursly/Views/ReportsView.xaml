@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿<UserControl x:Class="Hoursly.Views.ReportsView"
+<UserControl x:Class="Hoursly.Views.ReportsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -34,11 +33,10 @@
         <xctk:TimePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="495,189,0,0" VerticalAlignment="Top" Width="118" />
     </Grid>
 </UserControl>
-=======
 ﻿<Window x:Class="Hoursly.Views.ReportsView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Email Send Example" Height="378.947" Width="559.211">
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         Title="Email Send Example" Height="378.947" Width="559.211">
     <Grid Margin="-2,10,-28,-51">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="41*"/>
@@ -65,4 +63,4 @@
 
     </Grid>
 </Window>
->>>>>>> 4d88f045a4e0e9f39e0accf3dff5b1b3343c1c1c
+

@@ -19,7 +19,7 @@ namespace Hoursly.UnitTests.ViewModels
         {
             _projectValidator = Substitute.For<IValidator<ProjectModel>>();
             var systemMessageSender = Substitute.For<ISystemMessageSender>();
-            var mapper = new ProjectsMapper();
+            var mapper = new ProjectToProjectModelMapper();
             _projectsViewModel =
                 new ProjectsViewModel(
                     ProjectRepository,

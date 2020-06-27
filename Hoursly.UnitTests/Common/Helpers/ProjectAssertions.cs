@@ -13,6 +13,7 @@ namespace Hoursly.UnitTests.Common.Helpers
             left.EndDate.ShouldBe(right.EndDate);
             left.Priority.ShouldBe(right.Priority);
             left.TaskLimit.ShouldBe(right.TaskLimit);
+            left.SupervisorEmail.ShouldBe(right.SupervisorEmail);
         }
 
         public static void AssertEquals(this ProjectModel left, ProjectModel right)
@@ -23,6 +24,7 @@ namespace Hoursly.UnitTests.Common.Helpers
             left.EndDate.ShouldBe(right.EndDate);
             left.Priority.ShouldBe(right.Priority);
             left.TaskLimit.ShouldBe(right.TaskLimit);
+            left.SupervisorEmail.ShouldBe(right.SupervisorEmail);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Hoursly.UnitTests.Common.Helpers
                 publicIdIsEmpty ? Guid.Empty : fakeValidProject.PublicId,
                 fakeValidProject.Name,
                 fakeValidProject.StartDate,
+                fakeValidProject.SupervisorEmail,
                 fakeValidProject.EndDate,
                 fakeValidProject.Priority,
                 fakeValidProject.TaskLimit);
@@ -38,7 +39,9 @@ namespace Hoursly.UnitTests.Common.Helpers
                     name,
                     new DateTime(2001, 01, 01),
                     new DateTime(2002, 01, 01),
-                    ProjectPriority.Low, 10);
+                    ProjectPriority.Low,
+                    10,
+                    "test@mail.com");
                 projects.Add(project);
             }
 

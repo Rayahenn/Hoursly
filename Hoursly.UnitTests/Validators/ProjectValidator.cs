@@ -39,6 +39,30 @@ namespace Hoursly.UnitTests.Validators
             validationResult.Errors.Any(e => e.ErrorCode == nameof(MaximumLengthValidator)).ShouldBeTrue();
         }
 
+        public static IEnumerable<object[]> InvalidEmails => new List<object[]>
+        {
+            new object[] {new string('a', 30)},
+            new object[] {"test.mail.com"},
+            new object[] {"@mail.com"}
+        };
+
+        [Theory]
+        [Trait("Category", "ProjectsValidators")]
+        [MemberData(nameof(InvalidEmails))]
+        public void Given_ValidateProject_When_SupervisorEmailIsInvalid_Then_ReturnsError(string invalidEmail)
+        {
+            //Arrange
+            var fakeProjectModel = ProjectsTestHelper.GetFakeProjectModel();
+            fakeProjectModel.SupervisorEmail = invalidEmail;
+
+            //Act
+            var validationResult = _projectValidator.Validate(fakeProjectModel);
+
+            //Assert
+            validationResult.IsValid.ShouldBeFalse();
+            validationResult.Errors.Any(e => e.ErrorCode == nameof(EmailValidator)).ShouldBeTrue();
+        }
+
         [Fact]
         [Trait("Category", "ProjectsValidators")]
         public void Given_ValidateProject_When_ModelIsCorrect_Then_ReturnsNoError()

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Hoursly.Models;
-using Hoursly.Repositories;
+using Hoursly.Repositories.Projects;
 using Hoursly.UnitTests.Common;
 using Hoursly.UnitTests.Common.Helpers;
 using Shouldly;
