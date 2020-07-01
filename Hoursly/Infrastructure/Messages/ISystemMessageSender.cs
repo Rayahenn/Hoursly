@@ -1,4 +1,4 @@
-﻿namespace Hoursly.Common.Messages
+﻿namespace Hoursly.Infrastructure.Messages
 {
     public interface ISystemMessageSender
     {

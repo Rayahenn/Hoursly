@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentValidation;
-using Hoursly.Common.Messages;
 using Hoursly.Entities;
+using Hoursly.Infrastructure.Messages;
 using Hoursly.Mappers;
 using Hoursly.Models;
 using Hoursly.UnitTests.Common;

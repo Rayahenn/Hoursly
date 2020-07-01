@@ -2,8 +2,9 @@
 using Autofac;
 using Caliburn.Micro;
 using FluentValidation;
-using Hoursly.Common.Messages;
 using Hoursly.Database;
+using Hoursly.Infrastructure.Emails;
+using Hoursly.Infrastructure.Messages;
 using Hoursly.Mappers.Common;
 using Hoursly.Repositories.Common;
 
@@ -45,6 +46,11 @@ namespace Hoursly.Common.Extensions.DependencyInjection
         {
             builder.RegisterType<WindowManager>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<EventAggregator>().AsImplementedInterfaces().SingleInstance();
+        }
+
+        public static void AddInfrastructure(this ContainerBuilder builder)
+        {
+            builder.RegisterType<EmailSender>().AsImplementedInterfaces().SingleInstance();
         }
 
         public static void AddDatabase(this ContainerBuilder builder)

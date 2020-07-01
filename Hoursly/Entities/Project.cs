@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hoursly.Common.Decorators;
 
 namespace Hoursly.Entities
@@ -62,6 +63,12 @@ namespace Hoursly.Entities
         {
             var timeLog = TimeLog.Create(this, startDate, endDate);
             TimeLogs.Add(timeLog);
+        }
+
+        public void RemoveLog(Guid timeLogPublicId)
+        {
+            var timeLog = TimeLogs.Single(tl => tl.PublicId == timeLogPublicId);
+            TimeLogs.Remove(timeLog);
         }
 
         public void Update(

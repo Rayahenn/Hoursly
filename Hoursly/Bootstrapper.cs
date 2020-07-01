@@ -34,6 +34,7 @@ namespace Hoursly
             builder.AddMappers();
             builder.AddDatabase();
             builder.AddSystemUtilities();
+            builder.AddInfrastructure();
             builder.AddRepositories(currentAssembly);
             builder.AddValidators(currentAssembly);
             builder.AddViewModels(currentAssembly);

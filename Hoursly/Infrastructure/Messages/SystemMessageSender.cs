@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Hoursly.Common.Messages
+namespace Hoursly.Infrastructure.Messages
 {
     public class SystemMessageSender : ISystemMessageSender
     {

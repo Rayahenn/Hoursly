@@ -2,9 +2,11 @@
 using System.Linq;
 using Caliburn.Micro;
 using FluentValidation;
+using Hoursly.Common.Extensions.Models;
 using Hoursly.Common.Extensions.Validations;
-using Hoursly.Common.Messages;
 using Hoursly.Entities;
+using Hoursly.Infrastructure.Emails;
+using Hoursly.Infrastructure.Messages;
 using Hoursly.Mappers.Common;
 using Hoursly.Models;
 using Hoursly.Repositories.Projects;
@@ -13,24 +15,26 @@ namespace Hoursly.ViewModels
 {
     public class ReportsViewModel : Screen
     {
+        private readonly IEmailSender _emailSender;
         private readonly IMapper<Project, ProjectTimeLogsModel> _mapper;
         private readonly IProjectRepository _projectRepository;
         private readonly ISystemMessageSender _systemMessageSender;
         private readonly IValidator<TimeLogModel> _timeLogsValidator;
 
         private ProjectTimeLogsModel _selectedProject;
-        private TimeLogModel _selectedTimeLog = TimeLogModel.Empty();
 
         public ReportsViewModel(
             IProjectRepository projectRepository,
             IMapper<Project, ProjectTimeLogsModel> mapper,
             IValidator<TimeLogModel> timeLogsValidator,
-            ISystemMessageSender systemMessageSender)
+            ISystemMessageSender systemMessageSender,
+            IEmailSender emailSender)
         {
             _projectRepository = projectRepository;
             _mapper = mapper;
             _timeLogsValidator = timeLogsValidator;
             _systemMessageSender = systemMessageSender;
+            _emailSender = emailSender;
         }
 
         public BindableCollection<ProjectTimeLogsModel> Projects => LoadProjects();
@@ -45,34 +49,37 @@ namespace Hoursly.ViewModels
             }
         }
 
-        public TimeLogModel SelectedTimeLog
+        public TimeLogModel LogTimeForm
         {
-            get => _selectedTimeLog;
+            get => SelectedTimeLogToDelete;
             set
             {
-                _selectedTimeLog = value;
-                NotifyOfPropertyChange(() => SelectedTimeLog.StartDate);
-                NotifyOfPropertyChange(() => SelectedTimeLog.EndDate);
+                SelectedTimeLogToDelete = value;
+                NotifyOfPropertyChange(() => LogTimeForm.StartDate);
+                NotifyOfPropertyChange(() => LogTimeForm.EndDate);
             }
         }
 
+        public TimeLogModel SelectedTimeLogToDelete { get; set; } = TimeLogModel.Empty();
+
+
         public DateTime StartDate
         {
-            get => _selectedTimeLog.StartDate;
+            get => SelectedTimeLogToDelete.StartDate;
             set
             {
-                _selectedTimeLog.StartDate = value;
-                NotifyOfPropertyChange(() => _selectedTimeLog.StartDate);
+                SelectedTimeLogToDelete.StartDate = value;
+                NotifyOfPropertyChange(() => SelectedTimeLogToDelete.StartDate);
             }
         }
 
         public DateTime EndDate
         {
-            get => _selectedTimeLog.EndDate;
+            get => SelectedTimeLogToDelete.EndDate;
             set
             {
-                _selectedTimeLog.EndDate = value;
-                NotifyOfPropertyChange(() => _selectedTimeLog.EndDate);
+                SelectedTimeLogToDelete.EndDate = value;
+                NotifyOfPropertyChange(() => SelectedTimeLogToDelete.EndDate);
             }
         }
 
@@ -86,7 +93,7 @@ namespace Hoursly.ViewModels
 
         public void Create()
         {
-            var validationResult = _timeLogsValidator.Validate(SelectedTimeLog);
+            var validationResult = _timeLogsValidator.Validate(LogTimeForm);
             if (!validationResult.IsValid)
             {
                 var errorMessage = validationResult.GetErrorsSummary();
@@ -95,13 +102,27 @@ namespace Hoursly.ViewModels
             }
 
             var project = _projectRepository.Get(_selectedProject.PublicId);
-            project.LogTime(_selectedTimeLog.StartDate, _selectedTimeLog.EndDate);
+            project.LogTime(SelectedTimeLogToDelete.StartDate, SelectedTimeLogToDelete.EndDate);
             _projectRepository.Commit();
+
+            _emailSender.Send(project.SupervisorEmail, LogTimeForm.StartDate, LogTimeForm.EndDate);
 
             NotifyOfPropertyChange(() => Projects);
 
-            SelectedTimeLog = TimeLogModel.Empty();
+            LogTimeForm = TimeLogModel.Empty();
             _systemMessageSender.Send("Time logged");
+        }
+
+        public void Delete()
+        {
+            SelectedTimeLogToDelete.ThrowIfPublicIdIsNullOrEmpty();
+            SelectedProject.ThrowIfPublicIdIsNullOrEmpty();
+
+            var project = _projectRepository.Get(_selectedProject.PublicId);
+            project.RemoveLog(SelectedTimeLogToDelete.PublicId);
+            _projectRepository.Commit();
+            _systemMessageSender.Send("Log Removed removed");
+            NotifyOfPropertyChange(() => Projects);
         }
     }
 }

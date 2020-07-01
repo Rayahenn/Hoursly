@@ -5,8 +5,8 @@ using FluentValidation;
 using Hoursly.Common.Extensions.Models;
 using Hoursly.Common.Extensions.Validations;
 using Hoursly.Common.Helpers;
-using Hoursly.Common.Messages;
 using Hoursly.Entities;
+using Hoursly.Infrastructure.Messages;
 using Hoursly.Mappers.Common;
 using Hoursly.Models;
 using Hoursly.Repositories.Projects;
@@ -81,6 +81,7 @@ namespace Hoursly.ViewModels
                 NotifyOfPropertyChange(() => _selectedProject.Priority);
                 NotifyOfPropertyChange(() => _selectedProject.EndDate);
                 NotifyOfPropertyChange(() => _selectedProject.TaskLimit);
+                NotifyOfPropertyChange(() => _selectedProject.SupervisorEmail);
                 EditMode = _selectedProject.PublicId != Guid.Empty;
             }
         }
